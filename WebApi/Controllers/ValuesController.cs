@@ -18,7 +18,6 @@ namespace OtelPropagation.Controllers
     public class ValuesController : ControllerBase
     {
         
-        private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
 
         private readonly ILogger<ValuesController> _logger;
         private readonly IConfiguration _configuration;
@@ -32,22 +31,13 @@ namespace OtelPropagation.Controllers
         [HttpGet]
         public string [] Get()
         {
-            var activity = Activity.Current;
-
-            //Propagator.Extract(new PropagationContext(activity.Context, Baggage.Current), Request.Headers, InjectContextIntoHeader);
-            
+           
             return new string[] { "sensor1", "sensor2", "sensor3" };
            
         }
 
         
 
-        private IEnumerable<string> InjectContextIntoHeader(IHeaderDictionary arg1, string arg2)
-        {
-            return null;
-        }
-
-       
 
       
 

@@ -13,7 +13,6 @@ namespace WebApiClient
     class Program
     { 
 
-        private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
         static async Task Main(string[] args)
         {
             Activity.DefaultIdFormat = ActivityIdFormat.W3C;
@@ -38,9 +37,6 @@ namespace WebApiClient
                 var response = await client.GetAsync("https://localhost:44309/api/Values");
                 var activity = Activity.Current;
 
-                Propagator.Inject(new PropagationContext(activity.Context, Baggage.Current), response,(HttpResponseMessage x,String y,String z)=> {
-                    x.Headers.Add(y, z);
-                });
 
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
